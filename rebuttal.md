@@ -1,4 +1,4 @@
-#### **Table S2. Training-free methods surpass supervised baselines on challenging low-data regimes (MSAD, UBnormal).**
+## **Table S2. Training-free methods surpass supervised baselines on challenging low-data regimes (MSAD, UBnormal).**
 |   Methods	|Supervision| MSAD $AUC$ 	|MSAD $AUC_a$  |MSAD $AP$|MSAD  $AP_a$ |UBnormal $AUC$   |
 |------|-------|-------|-------|-------|-------| -------|
 |RTFM     | Weakly Supervised|  86.65           |     -		| 66.30	|         -    |  60.94|
@@ -14,7 +14,7 @@
 |**OneVAD(ours)** |**Training-Free**|**92.36**|**76.47**|**78.19**|**81.45** |74.30|
 
 
-#### **Table S2  Component-level inference time consumption analysis of different methods on UCF-Crime.**
+## **Table S2  Component-level inference time consumption analysis of different methods on UCF-Crime.**
 |   Methods	| Video segmentation			|Video/Text Encoding  |VLM Caption			| LLM Summary |LLM Scoring		| Total(GPU hours)| AUC(%)|
 |------|-------|-------|-------|    -------|     -------|  -------|  -------| 
 |LAVAD(CVPR2024)    |   -                                     			|     5.1h           		|   20h  				| 7.7h$\times$2 	|   7.7h$\times$2 		|	55.9			| 80.28	| 
