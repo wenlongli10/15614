@@ -13,6 +13,7 @@
 |Unified | **Training-Free**			 |85.9|-|76.4|-| 68.98          |
 |PANDA | **Training-Free**			 |-|-|-|- | **75.78**      |
 |**OneVAD(ours)** | **Training-Free**    |**92.36**|**76.47**|**78.19**|**81.45** | 74.30          |
+
 **Note.** The MSAD dataset has fewer training samples for each type of anomaly, while UBnormal is an open-set dataset.
 
 ## **Table S2 Component-level inference time consumption analysis of different methods on UCF-Crime dataset.**
@@ -39,6 +40,7 @@ OneVAD-online(ours)| 5 |1.3 |6.3|
 | 1 - 20                    | 0.3898                                       | 85.64 | 
 | 10 - 28                   | 0.4480                                       | 85.87 | 
 | 10 - 20(Ours)             | **0.4905**                                   | **86.48** |
+
 **Note.** Range Consensus sIoU is computed as the mean soft IoU between each selected layer and the layer-range prototype attention, averaged over all decode steps, segments, and videos. Since attentions were dumped with layer interval = 2, only saved even-numbered layers within each requested range are used.
 
 ## **Table S6. Comparison of performance of OneVAD under different VLM on UCF-Crime dataset.**
