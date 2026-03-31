@@ -61,7 +61,7 @@ OneVAD-online(ours)| 5 |1.3 |6.3|
 ## **Table S5. Effect of intermediate-layer range selection on attention aggregation stability and anomaly detection performance on UCF-Crime.**
 
 |Attention Aggregation Range	|Step Set	|Localization Stability (Range Consensus sIoU)↑	|AUC (%)↑
-|-------------------------------|--------------|-------------------------------------------| 
+|-------------------------------|--------------|-----------------|---------------------------------------| 
 0-20	|All decode steps	|0.3898	|85.64|
 10-28	|All decode steps	|0.4480	|85.87|
 10-20	|All decode steps	|**0.4905**	|**86.48**|
