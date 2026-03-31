@@ -1,4 +1,4 @@
-## **Table S1. Training-free methods surpass supervised baselines on challenging low-data dataset (MSAD, UBnormal).**
+## **Table S1. Training-free methods surpass supervised baselines on challenging low-data<sup>1</sup> dataset (MSAD, UBnormal).**
 |   Methods	| Supervision          | MSAD $AUC$ 	|MSAD $AUC_a$  |MSAD $AP$|MSAD  $AP_a$ | UBnormal $AUC$ |
 |------|----------------------|-------|-------|-------|-------|----------------|
 |RTFM     | Weakly Supervised    |  86.65           |     -		| 66.30	|         -    | 60.94          |
@@ -14,7 +14,8 @@
 |PANDA | **Training-Free**			 |-|-|-|- | **75.78**      |
 |**OneVAD(ours)** | **Training-Free**    |**92.36**|**76.47**|**78.19**|**81.45** | 74.30          |
 
-**Note.** The MSAD dataset has fewer training samples for each type of anomaly, while UBnormal is an open-set dataset.
+<sup>1</sup> The MSAD dataset has fewer training samples for each type of anomaly, while UBnormal is an open-set dataset.
+
 
 ## **Table S2 Component-level inference time consumption analysis of different methods on UCF-Crime dataset.**
 |   Methods	| Video segmentation			|Video/Text Encoding  | VLM Caption			        | LLM Summary                    | LLM Scoring		         | Total(GPU hours)| AUC(%)|
@@ -25,6 +26,7 @@
 |**OneVAD(Ours)** |  0.3h 			                        |    -               		    	| 17.2h $\times$ 2	     | 	0.6h $\times$ 2		             | 2.8h $\times$ 2		     |	41.5	| **86.48**	|  
 
 
+
 ## **Table S3. Comparison of Decision Period, Processing Time, and Decision Delay.**
 |   Methods| Decision Period(s)   |  Processing Time(s)   | Delay(s) | 
 |------|-------|-------|-------|    
@@ -32,22 +34,47 @@ REWARD| 6.4| 0.5| 6.9|
 Montior|0.6 |5.9 |6.5|
 OneVAD-online(ours)| 5 |1.3 |6.3|
 
-## **Table S4 FP**
+
+## ****Table S4. Distribution statistics of anomaly scores on normal frames and corresponding detection performance on the UCF-Crime dataset.** `mean`, `median`, `p95`, and `max` denote the average, median, 95th-percentile, and maximum anomaly scores over all normal frames, respectively. Lower values indicate better suppression of false positives, particularly for `p95` and `max`, which characterize the high-score tail of normal frames.**
+| Methods                       | mean↓     | median↓   | p95↓      | max↓    | ALL frame AUC(%)↑ | 
+|-------------------------------|-----------|-----------|-----------|--------|-------------------|
+| OneVAD-Qwen2.5-VL-7B-Instruct | **0.1775** | **0.0879** | **0.7550** | 0.9968 | **86.48**         |
+| -  sound symbolism            | 0.1845    | 0.1012    | 0.7560    | 0.9968 | 86.11             |
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="normal_frame_score_hist.png" width="420"><br>
+      (a) OneVAD-Qwen2.5-VL-7B-Instruct
+    </td>
+    <td align="center">
+      <img src="-ss_normal_frame_score_hist.png" width="420"><br>
+      (b) Without sound symbolism
+    </td>
+  </tr>
+</table>
+
+**Figure S4.** Distribution of anomaly scores on normal frames. The full model produces slightly lower `mean`, `median`, and `p95`, indicating a lighter high-score tail on normal frames and better suppression of false positives.
+
+
 
 ## **Table S5. Effect of different intermediate-layer ranges on attention aggregation stability and anomaly detection performance (AUC) on UCF-Crime dataset.**
-| Attention Aggregation Range (Layers) | Localization Stability (Range Consensus sIoU) | AUC(%) | 
-|---------------------------|----------------------------------------------|-------|    
-| 1 - 20                    | 0.3898                                       | 85.64 | 
-| 10 - 28                   | 0.4480                                       | 85.87 | 
-| 10 - 20(Ours)             | **0.4905**                                   | **86.48** |
+| Attention Aggregation Range (Layers) | Localization Stability(Range Consensus sIoU<sup>2</sup>)↑| AUC(%) | 
+|--------------------------------------|-----------------------------------------------------------|-------|    
+| 1 - 20                               | 0.3898                                                    | 85.64 | 
+| 10 - 28                              | 0.4480                                                    | 85.87 | 
+| 10 - 20                              | **0.4905**                                                | **86.48** |
 
-**Note.** Range Consensus sIoU is computed as the mean soft IoU between each selected layer and the layer-range prototype attention, averaged over all decode steps, segments, and videos. Since attentions were dumped with layer interval = 2, only saved even-numbered layers within each requested range are used.
+<sup>2</sup> Range Consensus sIoU is computed as the mean soft IoU between each selected layer and the layer-range prototype attention, averaged over all decode steps, segments, and videos. As the attention maps were extracted with a stride of 2 layers, only the even-numbered layers within each specified range are available for use.
+
 
 ## **Table S6. Comparison of performance of OneVAD under different VLM on UCF-Crime dataset.**
-| Methods        | AUC(%) | 
-|----------------|--------| 
-| Qwen2.5VL-8B   | 0.5    |
-| Qwen2.5VL-8B   | 0.5    |
-| InternVL3-8B   | 0.6    |
-| InternVL3_5-8B | 5      |
-| InternVL3_5-8B | 5      |
+| Methods                       | Release Date | AUC(%)                                    | 
+|-------------------------------|--------------|-------------------------------------------| 
+| OneVAD-LLaVA-NeXT-Video       | 2024.12      | Instruction following failed <sup>3</sup> |
+| OneVAD-VideoLLaMA3-8B         | 2025.01      | Instruction following failed <sup>3</sup> |
+| OneVAD-Qwen2.5-VL-7B-Instruct | 2025.03      | 86.48                                     |
+| OneVAD-InternVL3-8B           | 2025.05      | 86.21                                     |
+| OneVAD-InternVL3_5-8B         | 2025.08      | 86.43                                     |
+
+<sup>3</sup> While early VLMs possess relatively strong visual captioning capabilities, they remain insufficient in instruction following tasks that require complex reasoning and strict output formatting constraints, rendering them inapplicable to the OneVAD framework.
