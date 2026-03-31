@@ -67,7 +67,7 @@ OneVAD-online(ours)| 5 |1.3 |6.3|
 10-20	|All decode steps	|**0.4905**	|**86.48**|
 10-20	|First generated-token step	|0.4493	|84.52|
 
-Note. Range Consensus sIoU is defined as the mean soft IoU between each selected layer and the prototype attention map obtained by averaging the selected layers within a given range, and is further averaged over segments and videos. For efficiency, attention maps are sampled with a layer interval of 2 and a decode-step interval of 5. For the last row, the score is computed only on the first generated-token step.
+**Note.** Range Consensus sIoU is defined as the mean soft IoU between each selected layer and the prototype attention map obtained by averaging the selected layers within a given range, and is further averaged over segments and videos. For efficiency, attention maps are sampled with a layer interval of 2 and a decode-step interval of 5. For the last row, the score is computed only on the first generated-token step.
 
 ## **Table S6. Comparison of performance of OneVAD under different VLM on UCF-Crime dataset.**
 | Methods                       | Release Date | AUC(%)                                    | 
@@ -82,8 +82,17 @@ Note. Range Consensus sIoU is defined as the mean soft IoU between each selected
 
 
 ## **Table S7. Effect of different intermediate-layer ranges on attention aggregation stability and anomaly detection performance (AUC) on UCF-Crime dataset.**
-| Cropping Strategy |  AUC(%) | 
-|--------------------------------------|----------------------------------------------------------|
-| Per‑frame cropping (baseline)        | 84.31                                                 |
-| Clip‑wise stable cropping (Ours)     | 86.48                                                  |
+| Cropping Strategy | AUC(%) | 
+|--------------------------------------|--------|
+| Per‑frame cropping (baseline)        | 84.87  |
+| Clip‑wise stable cropping (Ours)     | 86.48  |
 
+## **Table S8. Ablation study of visual input types for the Zoom‑in Pass on the UCF‑Crime dataset.** 
+| -| Zoom-in Pass Visual Input  | AUC(%) | 
+|------- |----------------------------|--------|
+|Holistic Pass | Natvie Input               | 85.42  |
+|Holistic Pass | Motion Cue                 | 85.13  |
+|Holistic Pass | Attention Cue              | 85.79  |
+|Holistic Pass | Motion Cue + Attention Cue | 86.48  |
+
+**Note.** Performance comparison across different visual inputs used in the Zoom‑in Pass. “Native Input” refers to the original video clip without cropping. “Motion Cue” and “Attention Cue” denote crops generated using only the motion map or only the attention‑derived semantic map, respectively. Their combination yields the best result.
