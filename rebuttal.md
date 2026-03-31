@@ -82,8 +82,8 @@ Note. Range Consensus sIoU is defined as the mean soft IoU between each selected
 
 
 ## **Table S7. Effect of different intermediate-layer ranges on attention aggregation stability and anomaly detection performance (AUC) on UCF-Crime dataset.**
-| Attention Aggregation Token (Layers) | Localization Stability(Range Consensus sIoU<sup>2</sup>)↑| AUC(%) | 
-|--------------------------------------|-----------------------------------------------------------|-------|    
-| 1 - 20                               | 0.3898                                                    | 85.64 | 
-| 10 - 28                              | 0.4480                                                    | 85.87 | 
-| All                                  | **0.4905**                                                | **86.48** |
+| Cropping Strategy | | AUC(%) | 
+|--------------------------------------|-----------------------------------------------------------|
+| Per‑frame cropping (baseline)        | 84.31                                                  |
+| Clip‑wise stable cropping (Ours)     | 86.48                                                   |
+
