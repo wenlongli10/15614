@@ -58,15 +58,16 @@ OneVAD-online(ours)| 5 |1.3 |6.3|
 
 
 
-## **Table S5. Effect of different intermediate-layer ranges on attention aggregation stability and anomaly detection performance (AUC) on UCF-Crime dataset.**
-| Attention Aggregation Range (Layers) | Localization Stability(Range Consensus sIoU<sup>2</sup>)↑| AUC(%) | 
-|--------------------------------------|-----------------------------------------------------------|-------|    
-| 1 - 20                               | 0.3898                                                    | 85.64 | 
-| 10 - 28                              | 0.4480                                                    | 85.87 | 
-| 10 - 20                              | **0.4905**                                                | **86.48** |
+## **Table S5. Effect of intermediate-layer range selection on attention aggregation stability and anomaly detection performance on UCF-Crime.**
 
-<sup>2</sup> Range Consensus sIoU is computed as the mean soft IoU between each selected layer and the layer-range prototype attention, averaged over all decode steps, segments, and videos. As the attention maps were extracted with a stride of 2 layers, only the even-numbered layers within each specified range are available for use.
+|Attention Aggregation Range	|Step Set	|Localization Stability (Range Consensus sIoU)↑	|AUC (%)↑
+|-------------------------------|--------------|-------------------------------------------| 
+0-20	|All decode steps	|0.3898	|85.64|
+10-28	|All decode steps	|0.4480	|85.87|
+10-20	|All decode steps	|**0.4905**	|**86.48**|
+10-20	|First generated-token step	|0.4493	|84.52|
 
+Note. Range Consensus sIoU is defined as the mean soft IoU between each selected layer and the prototype attention map obtained by averaging the selected layers within a given range, and is further averaged over segments and videos. For efficiency, attention maps are sampled with a layer interval of 2 and a decode-step interval of 5. For the last row, the score is computed only on the first generated-token step.
 
 ## **Table S6. Comparison of performance of OneVAD under different VLM on UCF-Crime dataset.**
 | Methods                       | Release Date | AUC(%)                                    | 
@@ -78,3 +79,11 @@ OneVAD-online(ours)| 5 |1.3 |6.3|
 | OneVAD-InternVL3_5-8B         | 2025.08      | 86.43                                     |
 
 <sup>3</sup> While early VLMs possess relatively strong visual captioning capabilities, they remain insufficient in instruction following tasks that require complex reasoning and strict output formatting constraints, rendering them inapplicable to the OneVAD framework.
+
+
+## **Table S7. Effect of different intermediate-layer ranges on attention aggregation stability and anomaly detection performance (AUC) on UCF-Crime dataset.**
+| Attention Aggregation Token (Layers) | Localization Stability(Range Consensus sIoU<sup>2</sup>)↑| AUC(%) | 
+|--------------------------------------|-----------------------------------------------------------|-------|    
+| 1 - 20                               | 0.3898                                                    | 85.64 | 
+| 10 - 28                              | 0.4480                                                    | 85.87 | 
+| All                                  | **0.4905**                                                | **86.48** |
